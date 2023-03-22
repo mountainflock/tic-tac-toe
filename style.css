@@ -1,0 +1,26 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: rgb(46, 46, 46);
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+  align-self: center;
+}
+
+.div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  background-color: rgb(210, 210, 210);
+  font-family: sans-serif;
+  font-size: 76px;
+  color: rgb(85, 85, 85);
+}
