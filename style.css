@@ -1,26 +1,79 @@
 body {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   height: 100vh;
   background-color: rgb(46, 46, 46);
+  font-family: sans-serif;
+  padding: 40px;
 }
 
 .container {
+  display: flex;
+  gap: 200px;
+}
+
+.form-section,
+.turn,
+button {
+  font-family: "Fredericka the Great", sans-serif;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(210, 210, 210);
+  height: 50%;
+  width: 95%;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 54px;
+}
+
+.label {
+  margin: 0 10px;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.turn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(210, 210, 210);
+  border-radius: 6px;
+  height: 20%;
+  padding: 10px;
+  width: 95%;
+  font-size: 26px;
+}
+
+.board {
   display: grid;
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
   gap: 5px;
   align-self: center;
+  width: 100%;
+}
+
+.cell {
+  font-size: 42px;
 }
 
 .div {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 4px;
+  border-radius: 6px;
   background-color: rgb(210, 210, 210);
-  font-family: sans-serif;
   font-size: 76px;
   color: rgb(85, 85, 85);
 }

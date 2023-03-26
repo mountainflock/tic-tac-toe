@@ -5,20 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap"
+      rel="stylesheet"
+    />
     <script src="script.js" defer></script>
     <title>Tic-Tac-Toe</title>
   </head>
   <body>
     <div class="container">
-      <div class="div"></div>
-      <div class="div"></div>
-      <div class="div"></div>
-      <div class="div"></div>
-      <div class="div"></div>
-      <div class="div"></div>
-      <div class="div"></div>
-      <div class="div"></div>
-      <div class="div"></div>
+      <div class="form-section">
+        <form>
+          <p>
+            <label for="player1" class="label">Player X:</label>
+            <input
+              id="palayer1"
+              name="player1"
+              type="text"
+              placeholder="name"
+              required
+            />
+          </p>
+          <p>
+            <label for="palayer2" class="label">Player O:</label>
+            <input
+              id="palayer2"
+              name="player2"
+              type="text"
+              placeholder="name"
+              required
+            />
+          </p>
+          <button>SUBMIT</button>
+        </form>
+      </div>
+      <div class="game">
+        <div class="turn">LET'S GET STARTED!</div>
+        <div class="board">
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+          <div class="div"></div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -1,35 +1,103 @@
-const Player = (name, mark) => {
-  const getName = () => name;
-  const getMark = () => mark;
-  const addMark = (mark) => {};
-  const win = () => {};
+function Gameboard() {
+  const board = ["", "", "", "", "", "", "", "", ""];
 
-  return { getName, getMark, addMark, win };
-};
+  for (let i = 0; i < board.length; i++) {
+    board[i] = Cell();
+  }
 
-const gameboard = ["X", "X", "O", "O", "X", "X", "O", "O", "X"];
+  const getBoard = () => board;
 
-(function GameController() {
-  const isGameOver = () => {};
-  const switchPlayerTurn = () => {};
-
-  return { isGameOver, switchPlayerTurn };
-})();
-
-const ScreenController = (() => {
-  const div = document.querySelectorAll(".div");
-  const displayField = (gameboard) => {
-    for (let i = 0; i < gameboard.length; i++) {
-      {
-        div[i].textContent = gameboard[i];
-      }
-    }
+  const addSymbol = (cell, player) => {
+    board[cell].addMark(player);
   };
-  const isValidCell = () => {};
-  const updateScreen = () => {};
-  const displayGameInfo = () => {};
 
-  return { displayField, isValidCell, updateScreen, displayGameInfo };
-})();
+  return { getBoard, addSymbol };
+}
 
-ScreenController.displayField(gameboard);
+function Cell() {
+  let value = "";
+
+  const addMark = (player) => {
+    value = player;
+  };
+  const getValue = () => value;
+
+  return {
+    addMark,
+    getValue,
+  };
+}
+
+function GameController(
+  playerOneName = "Player One",
+  playerTwoName = "Player Two"
+) {
+  const board = Gameboard();
+
+  const players = [
+    {
+      name: playerOneName,
+      mark: "X",
+    },
+    {
+      name: playerTwoName,
+      mark: "O",
+    },
+  ];
+
+  let activePlayer = players[0];
+
+  const switchPlayerTurn = () => {
+    activePlayer = activePlayer === players[0] ? players[1] : players[0];
+  };
+  const getActivePlayer = () => activePlayer;
+
+  const playRound = (cell) => {
+    board.addSymbol(cell, getActivePlayer().mark);
+
+    /*  This is where we would check for a winner and handle that logic,
+          such as a win message. */
+    switchPlayerTurn();
+  };
+
+  return {
+    playRound,
+    getActivePlayer,
+    getBoard: board.getBoard,
+  };
+}
+
+function ScreenController() {
+  const game = GameController();
+  const playerTurnDiv = document.querySelector(".turn");
+  const boardDiv = document.querySelector(".board");
+
+  const updateScreen = () => {
+    boardDiv.textContent = "";
+
+    const board = game.getBoard();
+    const activePlayer = game.getActivePlayer();
+
+    playerTurnDiv.textContent = `${activePlayer.name}'s turn...`;
+
+    board.forEach((cell, index) => {
+      const cellButton = document.createElement("button");
+      cellButton.classList.add("cell");
+      cellButton.dataset.cell = index;
+      cellButton.textContent = cell.getValue();
+      boardDiv.appendChild(cellButton);
+    });
+  };
+
+  function clickHandlerBoard(e) {
+    const selectedColumn = e.target.dataset.cell;
+    if (!selectedColumn) return;
+    game.playRound(selectedColumn);
+    updateScreen();
+  }
+  boardDiv.addEventListener("click", clickHandlerBoard);
+
+  updateScreen();
+}
+
+ScreenController();
