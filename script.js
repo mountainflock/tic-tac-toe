@@ -1,17 +1,19 @@
 function Gameboard() {
-  const board = ["", "", "", "", "", "", "", "", ""];
+  const board = [];
 
-  for (let i = 0; i < board.length; i++) {
-    board[i] = Cell();
+  for (let i = 0; i < 9; i++) {
+    board.push(Cell());
   }
 
-  const getBoard = () => board;
+  const getBoard = () => [...board];
 
   const addSymbol = (cell, player) => {
     board[cell].addMark(player);
   };
 
-  return { getBoard, addSymbol };
+  const isFree = (cell) => board[cell].getValue() === "";
+
+  return { getBoard, addSymbol, isFree };
 }
 
 function Cell() {
@@ -34,6 +36,14 @@ function GameController(
 ) {
   const board = Gameboard();
 
+  // const form = document.querySelector("form");
+
+  // form.addEventListener("submit", function (event) {
+  //   const playerOneName = document.querySelector("#player1").value;
+  //   const playerTwoName = document.querySelector("#player2").value;
+  //   event.preventDefault();
+  // });
+
   const players = [
     {
       name: playerOneName,
@@ -52,12 +62,41 @@ function GameController(
   };
   const getActivePlayer = () => activePlayer;
 
-  const playRound = (cell) => {
-    board.addSymbol(cell, getActivePlayer().mark);
+  const cellValue = (cell) => {
+    if (board.getBoard()[cell] !== "") {
+      return board.getBoard()[cell].getValue();
+    }
+  };
 
-    /*  This is where we would check for a winner and handle that logic,
-          such as a win message. */
-    switchPlayerTurn();
+  const isWin = (cell1, cell2, cell3) => {
+    const newMark = activePlayer.mark;
+    return (
+      cellValue(cell1) === newMark &&
+      cellValue(cell2) === newMark &&
+      cellValue(cell3) === newMark
+    );
+  };
+
+  const getWinner = () => {
+    if (
+      isWin(0, 4, 8) ||
+      isWin(0, 1, 2) ||
+      isWin(0, 3, 6) ||
+      isWin(1, 4, 7) ||
+      isWin(2, 4, 6) ||
+      isWin(2, 5, 8) ||
+      isWin(3, 4, 5) ||
+      isWin(6, 7, 8)
+    ) {
+      return activePlayer;
+    }
+  };
+
+  const playRound = (cell) => {
+    if (board.isFree(cell)) {
+      board.addSymbol(cell, getActivePlayer().mark);
+      switchPlayerTurn();
+    }
   };
 
   return {
@@ -90,9 +129,9 @@ function ScreenController() {
   };
 
   function clickHandlerBoard(e) {
-    const selectedColumn = e.target.dataset.cell;
-    if (!selectedColumn) return;
-    game.playRound(selectedColumn);
+    const selectedCell = e.target.dataset.cell;
+    if (!selectedCell) return;
+    game.playRound(selectedCell);
     updateScreen();
   }
   boardDiv.addEventListener("click", clickHandlerBoard);
