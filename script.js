@@ -1,6 +1,5 @@
 function Gameboard() {
-  const board = [];
-
+  let board = [];
   for (let i = 0; i < 9; i++) {
     board.push(Cell());
   }
@@ -11,16 +10,31 @@ function Gameboard() {
     board[cell].addMark(player);
   };
 
-  const isFree = (cell) => board[cell].getValue() === "";
+  const isCellFree = (cell) => board[cell].getValue() === "";
 
-  return { getBoard, addSymbol, isFree };
+  const isEmptyCells = () => board.some((cell) => cell.getValue() === "");
+
+  const resetBoard = () => {
+    board = [];
+    for (let i = 0; i < 9; i++) {
+      board.push(Cell());
+    }
+  };
+
+  return {
+    getBoard,
+    addSymbol,
+    isCellFree,
+    resetBoard,
+    isEmptyCells,
+  };
 }
 
 function Cell() {
   let value = "";
 
-  const addMark = (player) => {
-    value = player;
+  const addMark = (playerMark) => {
+    value = playerMark;
   };
   const getValue = () => value;
 
@@ -30,20 +44,8 @@ function Cell() {
   };
 }
 
-function GameController(
-  playerOneName = "Player One",
-  playerTwoName = "Player Two"
-) {
+function GameController(playerOneName, playerTwoName) {
   const board = Gameboard();
-
-  // const form = document.querySelector("form");
-
-  // form.addEventListener("submit", function (event) {
-  //   const playerOneName = document.querySelector("#player1").value;
-  //   const playerTwoName = document.querySelector("#player2").value;
-  //   event.preventDefault();
-  // });
-
   const players = [
     {
       name: playerOneName,
@@ -93,8 +95,20 @@ function GameController(
   };
 
   const playRound = (cell) => {
-    if (board.isFree(cell)) {
+    if (board.isCellFree(cell)) {
       board.addSymbol(cell, getActivePlayer().mark);
+      const winner = getWinner();
+      if (!board.isEmptyCells() && !winner) {
+        document.querySelector(".game-over").classList.add("game-over-visible");
+        document.querySelector(".winner-info").textContent = "It's a tie!";
+      }
+      if (winner) {
+        document.querySelector(".game-over").classList.add("game-over-visible");
+        document.querySelector(
+          ".winner-info"
+        ).textContent = `${winner.name} is the winner!`;
+      }
+
       switchPlayerTurn();
     }
   };
@@ -103,13 +117,35 @@ function GameController(
     playRound,
     getActivePlayer,
     getBoard: board.getBoard,
+    resetBoard: board.resetBoard,
   };
 }
 
-function ScreenController() {
-  const game = GameController();
+(function ScreenController() {
   const playerTurnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
+  const form = document.querySelector(".names-form");
+  const newGameButton = document.querySelector(".new-game-button");
+  let playerOneName, playerTwoName, game;
+
+  newGameButton.addEventListener("click", () => {
+    if (game != null) {
+      game.resetBoard();
+    }
+    document.querySelector(".game").classList.remove("game-inactive");
+    updateScreen();
+  });
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    playerOneName = document.querySelector("#player1").value;
+    playerTwoName = document.querySelector("#player2").value;
+    game = GameController(playerOneName, playerTwoName);
+    updateScreen();
+    document
+      .querySelector(".form-section")
+      .classList.add("form-section-invisible");
+  });
 
   const updateScreen = () => {
     boardDiv.textContent = "";
@@ -124,19 +160,14 @@ function ScreenController() {
       cellButton.classList.add("cell");
       cellButton.dataset.cell = index;
       cellButton.textContent = cell.getValue();
+      cellButton.addEventListener("click", handleCellClick);
       boardDiv.appendChild(cellButton);
     });
   };
 
-  function clickHandlerBoard(e) {
+  function handleCellClick(e) {
     const selectedCell = e.target.dataset.cell;
-    if (!selectedCell) return;
     game.playRound(selectedCell);
     updateScreen();
   }
-  boardDiv.addEventListener("click", clickHandlerBoard);
-
-  updateScreen();
-}
-
-ScreenController();
+})();
