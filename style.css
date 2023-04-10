@@ -1,22 +1,37 @@
 body {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
   font-family: sans-serif;
-  padding: 40px;
+  padding: 30px;
+  margin: 80px;
   background-image: url("img.jpg");
   background-size: cover;
+  height: 100vh;
 }
 
 .container {
   display: flex;
-  gap: 200px;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .form-section,
 .turn,
-.cell {
+.cell,
+.game-over-visible {
   font-family: "Fuzzy Bubbles";
+}
+
+.submit-button,
+.new-game-button {
+  border: none;
+  border-radius: 6px;
+  background-color: rgba(228, 228, 228, 80%);
+  color: rgb(50, 50, 50);
+  width: 100px;
+  padding: 5px;
 }
 
 .form-section {
@@ -103,4 +118,17 @@ body {
 .game-over-visible {
   display: flex;
   flex-direction: column;
+  color: rgb(228, 228, 228);
+  font-size: 36px;
+  text-align: center;
+  background-color: rgba(210, 210, 210, 20%);
+  height: 60%;
+  width: 100%;
+  padding: 34px;
+  border-radius: 6px;
+  gap: 20px;
+}
+
+.new-game-button {
+  align-self: center;
 }

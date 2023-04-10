@@ -26,6 +26,7 @@
               name="player1"
               type="text"
               placeholder="name"
+              pattern="^\p{Alpha}+$"
               required
             />
           </p>
@@ -36,6 +37,7 @@
               name="player2"
               type="text"
               placeholder="name"
+              pattern="^\p{Alpha}+$"
               required
             />
           </p>
@@ -46,21 +48,11 @@
       </div>
       <div class="game">
         <div class="turn"></div>
-        <div class="board">
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-          <div class="div"></div>
-        </div>
+        <div class="board"></div>
       </div>
       <div class="game-over">
         <div class="winner-info"></div>
-        <button class="new-game-button">PLAY AGAIN?</button>
+        <button class="new-game-button">PLAY AGAIN</button>
       </div>
     </div>
   </body>

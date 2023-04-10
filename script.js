@@ -100,15 +100,16 @@ function GameController(playerOneName, playerTwoName) {
       const winner = getWinner();
       if (!board.isEmptyCells() && !winner) {
         document.querySelector(".game-over").classList.add("game-over-visible");
+        document.querySelector(".game").classList.add("game-inactive");
         document.querySelector(".winner-info").textContent = "It's a tie!";
       }
       if (winner) {
+        document.querySelector(".game").classList.add("game-inactive");
         document.querySelector(".game-over").classList.add("game-over-visible");
         document.querySelector(
           ".winner-info"
         ).textContent = `${winner.name} is the winner!`;
       }
-
       switchPlayerTurn();
     }
   };
@@ -118,6 +119,7 @@ function GameController(playerOneName, playerTwoName) {
     getActivePlayer,
     getBoard: board.getBoard,
     resetBoard: board.resetBoard,
+    switchPlayerTurn,
   };
 }
 
@@ -133,6 +135,8 @@ function GameController(playerOneName, playerTwoName) {
       game.resetBoard();
     }
     document.querySelector(".game").classList.remove("game-inactive");
+    game.switchPlayerTurn();
+    document.querySelector(".game-over").classList.remove("game-over-visible");
     updateScreen();
   });
 
