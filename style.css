@@ -11,7 +11,7 @@ body {
 }
 
 p {
-  margin: 5px 0;
+  margin: 2px 0;
 }
 
 .container {
@@ -27,9 +27,51 @@ p {
   font-size: 32px;
   font-weight: bold;
   letter-spacing: 3px;
-  background-color: rgba(210, 210, 210, 20%);
-  color: rgb(228, 228, 228);
+  color: rgba(228, 228, 228, 80%);
   border-radius: 6px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  height: 36%;
+  width: 100%;
+  padding: 20px;
+  gap: 0px;
+}
+
+.form-section-invisible {
+  display: none;
+}
+
+#player1,
+#player2 {
+  font-family: "Waiting for the Sunrise", sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  background-color: rgba(228, 228, 228, 30%);
+  border: none;
+  width: 200px;
+  font-weight: 800;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+#player1 {
+  margin-left: -3px;
+}
+
+.label {
+  margin: 0 10px;
+}
+
+.submit-button-section {
+  display: flex;
+  justify-content: flex-end;
+  margin: 20px 0;
 }
 
 .submit-button,
@@ -54,49 +96,6 @@ p {
 .submit-button:active,
 .new-game-button:active {
   background-color: rgba(138, 138, 138, 0.4);
-}
-
-.form-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  height: 36%;
-  width: 100%;
-  padding: 20px;
-  gap: 0px;
-}
-
-#player1,
-#player2 {
-  font-family: "Waiting for the Sunrise", sans-serif;
-  font-size: 18px;
-  letter-spacing: 4px;
-  background-color: rgba(228, 228, 228, 30%);
-  border: none;
-  width: 200px;
-  font-weight: 800;
-  padding: 0 4px;
-  border-radius: 4px;
-}
-
-#player1 {
-  margin-left: -3px;
-}
-
-.form-section-invisible {
-  display: none;
-}
-
-.label {
-  margin: 0 10px;
-}
-
-.submit-button-section {
-  display: flex;
-  justify-content: flex-end;
-  margin: 20px 0;
 }
 
 .game {
@@ -132,14 +131,14 @@ p {
   font-family: "Fuzzy Bubbles", sans-serif;
   font-size: 64px;
   font-weight: 700;
-  color: rgb(228, 228, 228);
+  color: rgba(228, 228, 228, 80%);
   background-color: rgba(210, 210, 210, 20%);
   border-radius: 8px;
   border: none;
 }
 
 .cell:hover {
-  background-color: rgba(153, 153, 153, 0.2);
+  background-color: rgba(168, 167, 167, 0.2);
 }
 
 .cell:active {
@@ -155,7 +154,7 @@ p {
   flex-direction: column;
   text-align: center;
   height: 60%;
-  width: 110%;
+  width: 100%;
   padding: 34px;
   gap: 20px;
 }
