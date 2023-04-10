@@ -3,12 +3,15 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  font-family: sans-serif;
   padding: 30px;
   margin: 80px;
   background-image: url("img.jpg");
   background-size: cover;
   height: 100vh;
+}
+
+p {
+  margin: 5px 0;
 }
 
 .container {
@@ -19,19 +22,38 @@ body {
 
 .form-section,
 .turn,
-.cell,
 .game-over-visible {
-  font-family: "Fuzzy Bubbles";
+  font-family: "Waiting for the Sunrise", sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: 3px;
+  background-color: rgba(210, 210, 210, 20%);
+  color: rgb(228, 228, 228);
+  border-radius: 6px;
 }
 
 .submit-button,
 .new-game-button {
+  font-family: "Waiting for the Sunrise", sans-serif;
+  letter-spacing: 4px;
+  font-size: 19px;
+  font-weight: bolder;
   border: none;
   border-radius: 6px;
-  background-color: rgba(228, 228, 228, 80%);
-  color: rgb(50, 50, 50);
-  width: 100px;
+  background-color: rgba(228, 228, 228, 30%);
+  color: rgb(29, 28, 28);
+  width: 100%;
   padding: 5px;
+}
+
+.submit-button:hover,
+.new-game-button:hover {
+  background-color: rgba(164, 164, 164, 0.4);
+}
+
+.submit-button:active,
+.new-game-button:active {
+  background-color: rgba(138, 138, 138, 0.4);
 }
 
 .form-section {
@@ -40,13 +62,27 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  background-color: rgba(210, 210, 210, 20%);
-  color: rgb(228, 228, 228);
-  height: 50%;
-  width: 95%;
-  padding: 10px;
-  border-radius: 6px;
-  margin-top: 54px;
+  height: 36%;
+  width: 100%;
+  padding: 20px;
+  gap: 0px;
+}
+
+#player1,
+#player2 {
+  font-family: "Waiting for the Sunrise", sans-serif;
+  font-size: 18px;
+  letter-spacing: 4px;
+  background-color: rgba(228, 228, 228, 30%);
+  border: none;
+  width: 200px;
+  font-weight: 800;
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+#player1 {
+  margin-left: -3px;
 }
 
 .form-section-invisible {
@@ -60,6 +96,7 @@ body {
 .submit-button-section {
   display: flex;
   justify-content: flex-end;
+  margin: 20px 0;
 }
 
 .game {
@@ -78,12 +115,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(228, 228, 228);
-  border-radius: 6px;
   height: 20%;
-  padding: 10px;
-  width: 95%;
-  font-size: 26px;
+  width: 100%;
 }
 
 .board {
@@ -96,6 +129,7 @@ body {
 }
 
 .cell {
+  font-family: "Fuzzy Bubbles", sans-serif;
   font-size: 64px;
   font-weight: 700;
   color: rgb(228, 228, 228);
@@ -104,11 +138,12 @@ body {
   border: none;
 }
 
-.div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(85, 85, 85);
+.cell:hover {
+  background-color: rgba(153, 153, 153, 0.2);
+}
+
+.cell:active {
+  background-color: rgba(119, 119, 119, 0.2);
 }
 
 .game-over {
@@ -118,14 +153,10 @@ body {
 .game-over-visible {
   display: flex;
   flex-direction: column;
-  color: rgb(228, 228, 228);
-  font-size: 36px;
   text-align: center;
-  background-color: rgba(210, 210, 210, 20%);
   height: 60%;
-  width: 100%;
+  width: 110%;
   padding: 34px;
-  border-radius: 6px;
   gap: 20px;
 }
 

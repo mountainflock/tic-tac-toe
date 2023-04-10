@@ -8,16 +8,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&family=Waiting+for+the+Sunrise&display=swap"
       rel="stylesheet"
     />
-
     <script src="script.js" defer></script>
     <title>Tic-Tac-Toe</title>
   </head>
   <body>
     <div class="container">
       <div class="form-section">
+        <p>Welcome to Tic-Tac-Toe!</p>
+        <p>Enter your names:</p>
         <form class="names-form">
           <p>
             <label for="player1" class="label">Player X:</label>
@@ -25,7 +26,6 @@
               id="player1"
               name="player1"
               type="text"
-              placeholder="name"
               pattern="^\p{Alpha}+$"
               required
             />
@@ -36,13 +36,12 @@
               id="player2"
               name="player2"
               type="text"
-              placeholder="name"
               pattern="^\p{Alpha}+$"
               required
             />
           </p>
           <div class="submit-button-section">
-            <button class="submit-button" type="submit">SUBMIT</button>
+            <button class="submit-button" type="submit">START!</button>
           </div>
         </form>
       </div>
