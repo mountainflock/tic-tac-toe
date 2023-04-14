@@ -95,21 +95,26 @@ function GameController(playerOneName, playerTwoName) {
   };
 
   const playRound = (cell) => {
+    const gameField = document.querySelector(".game");
+    const gameOverField = document.querySelector(".game-over");
+    const winnerInfoField = document.querySelector(".winner-info");
+
     if (board.isCellFree(cell)) {
       board.addSymbol(cell, getActivePlayer().mark);
       const winner = getWinner();
+
       if (!board.isEmptyCells() && !winner) {
-        document.querySelector(".game-over").classList.add("game-over-visible");
-        document.querySelector(".game").classList.add("game-inactive");
-        document.querySelector(".winner-info").textContent = "It's a tie!";
+        gameOverField.classList.add("game-over-visible");
+        gameField.classList.add("game-inactive");
+        winnerInfoField.textContent = "It's a tie!";
       }
+
       if (winner) {
-        document.querySelector(".game").classList.add("game-inactive");
-        document.querySelector(".game-over").classList.add("game-over-visible");
-        document.querySelector(
-          ".winner-info"
-        ).textContent = `${winner.name} is the winner!`;
+        gameField.classList.add("game-inactive");
+        gameOverField.classList.add("game-over-visible");
+        winnerInfoField.textContent = `${winner.name} is the winner!`;
       }
+
       switchPlayerTurn();
     }
   };
@@ -127,16 +132,20 @@ function GameController(playerOneName, playerTwoName) {
   const playerTurnDiv = document.querySelector(".turn");
   const boardDiv = document.querySelector(".board");
   const form = document.querySelector(".names-form");
+  const formSection = document.querySelector(".form-section");
   const newGameButton = document.querySelector(".new-game-button");
+  const gameField = document.querySelector(".game");
+  const gameOverField = document.querySelector(".game-over");
+
   let playerOneName, playerTwoName, game;
 
   newGameButton.addEventListener("click", () => {
     if (game != null) {
       game.resetBoard();
     }
-    document.querySelector(".game").classList.remove("game-inactive");
+    gameField.classList.remove("game-inactive");
     game.switchPlayerTurn();
-    document.querySelector(".game-over").classList.remove("game-over-visible");
+    gameOverField.classList.remove("game-over-visible");
     updateScreen();
   });
 
@@ -146,9 +155,7 @@ function GameController(playerOneName, playerTwoName) {
     playerTwoName = document.querySelector("#player2").value;
     game = GameController(playerOneName, playerTwoName);
     updateScreen();
-    document
-      .querySelector(".form-section")
-      .classList.add("form-section-invisible");
+    formSection.classList.add("form-section-invisible");
   });
 
   const updateScreen = () => {
